@@ -1,18 +1,9 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import TodoListItem from '../todolistitem/TodoListItem.jsx';
 import './todolist.css';
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editing: null
-    };
-  }
-
-  render() {
-    const { todos, onToggleCompleted, onDelete, onEdit, filter } = this.props;
-    const { editing } = this.state;
+const TodoList = ({todos,onToggleCompleted,onDelete, onEdit, filter}) => {
+  const [editing, setEditing] = useState(null)
 
     const filteredTodos = todos.filter(todo => {
       if (filter === 'all') {
@@ -36,7 +27,7 @@ class TodoList extends Component {
             onDelete={onDelete}
             onEdit={onEdit}
             editing={editing}
-            setEditing={(editingId) => this.setState({ editing: editingId })}
+            setEditing={setEditing}
             isEditing = {isEditing}
             {...itemProps}
           />
@@ -50,6 +41,6 @@ class TodoList extends Component {
       </ul>
     );
   }
-}
+
 
 export default TodoList;
